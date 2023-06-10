@@ -1,33 +1,43 @@
+import { useForm } from "react-hook-form";
 
 const Login = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = data => {
+        console.log(data)
+    }
     return (
-        <div className="hero min-h-screen bg-base-200">
-            <div className="hero-content flex-col lg:flex-row-reverse">
-                <div className="text-center lg:text-left">
-                    <h1 className="text-5xl font-bold">Login now!</h1>
-                    <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+        <div className="hero min-h-screen mt-5">
+            <div className="hero-content flex-col lg:flex-row gap-10 bg-blue-500 bg-opacity-30 rounded-lg p-10">
+                <div className="text-center lg:text-left lg:w-1/2">
+                    <img className="rounded-xl" src="https://i.ibb.co/NFnmMcr/sports-tools-53876-138077.png" alt="" />
                 </div>
-                <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    <div className="card-body">
+                <div className="card w-full shadow-2xl bg-base-100 lg:w-1/2">
+                    <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+                        <h1 className="text-5xl font-bold text-center mb-12 text-orange-600">Login now</h1>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Email</span>
+                                <span className="label-text font-bold">Type Your Email</span>
                             </label>
-                            <input type="text" placeholder="email" className="input input-bordered" />
+                            <input type="email" placeholder="Your Email" className="input input-bordered" {...register("email", { required: "Email Address is required" })}
+                                aria-invalid={errors.email ? "true" : "false"} />
+                            {errors.email && <p className="text-red-600" role="alert">{errors.email?.message}</p>}
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Password</span>
+                                <span className="label-text font-bold">Password</span>
                             </label>
-                            <input type="text" placeholder="password" className="input input-bordered" />
+                            <input type="password" placeholder="Your Password" className="input input-bordered" {...register("password", { required: "Password is required" })
+                            } aria-invalid={errors.password ? "true" : "false"} />
+                            {errors.password && <p className="text-red-600" role="alert">{errors.password?.message}</p>}
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary">Login</button>
+                            <button className="btn bg-orange-600 font-bold hover:bg-green-500 border-none text-white">Login</button>
                         </div>
-                    </div>
+                    </form>
+                    <div className="divider">OR</div>
                 </div>
             </div>
         </div>

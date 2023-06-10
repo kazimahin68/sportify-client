@@ -19,7 +19,7 @@ const Navbar = () => {
         <li className="font-bold"><Link>Dashboard</Link></li>
     </>
     return (
-        <div className={`navbar bg-blue-500 bg-opacity-30 text-orange-600 ${isSticky ? "fixed top-0 left-0 w-full" : "relative"}`}>
+        <div className={`navbar bg-blue-500 bg-opacity-30 text-orange-600 ${isSticky ? "fixed top-0 left-0 w-full z-10" : "relative"}`}>
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -37,7 +37,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn bg-orange-600 font-bold hover:bg-green-500 border-none text-white">Button</a>
+                <Link to="/login" className="btn bg-orange-600 font-bold hover:bg-green-500 border-none text-white">Login</Link>
             </div>
         </div>
     );
