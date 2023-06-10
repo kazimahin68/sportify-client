@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -38,6 +39,7 @@ const Login = () => {
                         </div>
                     </form>
                     <div className="divider">OR</div>
+                    <p>New to this site? Please <Link to="/register">Register..</Link></p>
                 </div>
             </div>
         </div>
