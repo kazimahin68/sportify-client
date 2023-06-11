@@ -1,16 +1,32 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 // import PhoneInput from 'react-phone-number-input'
 // import 'react-phone-number-input/style.css'
 
 const Register = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { createUser } = useContext(AuthContext);
+    const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
 
     const onSubmit = data => {
-        console.log(data)
+        createUser(data.email, data.password)
+            .then((result) => {
+                if (result.user.providerId) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Your work has been saved',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+                reset();
+            })
+            .catch(error => console.log(error))
     }
     return (
-        <div className="hero min-h-screen mt-5">
+        <div className="hero min-h-screen mt-5 mb-5">
             <div className="hero-content flex-col lg:flex-row gap-10 bg-blue-500 bg-opacity-30 rounded-lg p-10">
                 <div className="text-center lg:text-left lg:w-1/2">
                     <img className="rounded-xl" src="https://i.ibb.co/NFnmMcr/sports-tools-53876-138077.png" alt="" />

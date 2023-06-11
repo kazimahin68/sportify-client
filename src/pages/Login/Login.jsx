@@ -30,6 +30,8 @@ const Login = () => {
                             <input type="password" placeholder="Your Password" className="input input-bordered" {...register("password", { required: "Password is required" })
                             } aria-invalid={errors.password ? "true" : "false"} />
                             {errors.password && <p className="text-red-600" role="alert">{errors.password?.message}</p>}
+
+                            {/* TODO: Forgot password verify */}
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
@@ -39,7 +41,7 @@ const Login = () => {
                         </div>
                     </form>
                     <div className="divider">OR</div>
-                    <p>New to this site? Please <Link to="/register">Register..</Link></p>
+                    <p className="text-center mb-5">New ti this site? Please<Link to="/register" className="btn btn-link normal-case no-underline p-2 text-orange-600">Register...</Link></p>
                 </div>
             </div>
         </div>

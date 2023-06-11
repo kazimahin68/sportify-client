@@ -18,8 +18,9 @@ const Navbar = () => {
         <li className="font-bold"><Link>Classes</Link></li>
         <li className="font-bold"><Link>Dashboard</Link></li>
     </>
+
     return (
-        <div className={`navbar bg-blue-500 bg-opacity-30 text-orange-600 ${isSticky ? "fixed top-0 left-0 w-full z-10" : "relative"}`}>
+        <div className={`navbar bg-blue-500 bg-opacity-30 text-orange-600 transition-all duration-1000 ${isSticky ? "fixed top-0 left-0 w-full z-50 transition duration-500" : "relative transition duration-500"}`}>
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
