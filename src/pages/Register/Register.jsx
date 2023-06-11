@@ -1,29 +1,55 @@
-import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../providers/AuthProvider";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
 // import PhoneInput from 'react-phone-number-input'
 // import 'react-phone-number-input/style.css'
 
 const Register = () => {
-    const { createUser } = useContext(AuthContext);
+    const { createUser, UpdateUserProfile } = useAuth;
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
+    const navigate = useNavigate();
+    const [error, setError] = useState('');
 
     const onSubmit = data => {
         createUser(data.email, data.password)
-            .then((result) => {
-                if (result.user.providerId) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Your work has been saved',
-                        showConfirmButton: false,
-                        timer: 1500
+            .then(() => {
+                // const loggedUser = result.user;
+                // console.log(loggedUser)
+                console.log(data)
+                console.log(data.email)
+
+                UpdateUserProfile(data.name, data.photo)
+                    .then(() => {
+                        const saveUser = { userName: data.name, email: data.email, userPhoto: data.photo, gender: data.gender }
+                        fetch('http://localhost:5000/users', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(saveUser)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                console.log(data)
+                                if (data.insertedId) {
+                                    reset();
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Your work has been saved',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                    navigate('/')
+                                }
+                            })
                     })
-                }
-                reset();
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                reset();
+                setError(error.message)
+            })
     }
     return (
         <div className="hero min-h-screen mt-5 mb-5">
@@ -38,8 +64,19 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text font-bold">Your Name</span>
                             </label>
-                            <input type="text" placeholder="Type Your Name" className="input input-bordered"  {...register("name", { required: "Your Name is required" })} />
+                            <input type="text" placeholder="Type Your Name" className="input input-bordered"  {...register("name", { required: "Your name is required" })} />
                         </div>
+
+                        {/* Photo URL */}
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text font-bold">Photo URL</span>
+                            </label>
+                            <input type="text"  {...register("photo", { required: "Photo URL is required" })} placeholder="Photo URL" className="input input-bordered" />
+                            {errors.photo && <p className="text-red-600" role="alert">{errors.email?.message}</p>}
+                        </div>
+
+                        {/* Email Field */}
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text font-bold">Type Your Email</span>
@@ -48,6 +85,8 @@ const Register = () => {
                                 aria-invalid={errors.email ? "true" : "false"} />
                             {errors.email && <p className="text-red-600" role="alert">{errors.email?.message}</p>}
                         </div>
+
+                        {/* Password Field */}
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text font-bold">Password</span>
@@ -64,6 +103,7 @@ const Register = () => {
                             {errors.password?.type === 'maxLength' && <p className="text-red-600">Password must be less than 12 characters</p>}
                             {errors.password?.type === 'pattern' && <p className="text-red-600">Password must have one uppercase and one special character.</p>}
                         </div>
+                        {/* Confirm Password Field */}
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text font-bold">Confirm Password</span>
@@ -75,6 +115,8 @@ const Register = () => {
                             } aria-invalid={errors.confirm ? "true" : "false"} />
                             {errors.confirm && <p className="text-red-600" role="alert">{errors.confirm?.message}</p>}
                         </div>
+
+                        {/* Gender Field */}
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text font-bold">Gender</span>
@@ -85,6 +127,7 @@ const Register = () => {
                                 <option value="other">Other</option>
                             </select>
                         </div>
+                        <p className="text-red-600">{error}</p>
 
                         {/* TODO: Phone Number and Address */}
                         {/* <div className="form-control">

@@ -1,22 +1,35 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
+    const { user, logOut } = useAuth();
+    // console.log(user)
+
+    const handleLogout = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.log(error))
+    }
+
     const [isSticky, setIsSticky] = useState(false)
     useEffect(() => {
         const handleScroll = () => {
             setIsSticky(window.scrollY > 0);
         };
         window.addEventListener("scroll", handleScroll);
-        return () =>{
+        return () => {
             window.removeEventListener("scroll", handleScroll);
         }
     }, [])
+    const isAdmin = true;
     const navItems = <>
         <li className="font-bold"><Link>Home</Link></li>
         <li className="font-bold"><Link>Instructor</Link></li>
         <li className="font-bold"><Link>Classes</Link></li>
-        <li className="font-bold"><Link>Dashboard</Link></li>
+        {/* {user && <li className="font-bold"><Link>Dashboard</Link></li>} */}
+        {user && isAdmin && <li className="font-bold"><Link>Dashboard</Link></li>}
+        {/* {user && <li className="font-bold"><Link>Dashboard</Link></li>} */}
     </>
 
     return (
@@ -38,7 +51,8 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to="/login" className="btn bg-orange-600 font-bold hover:bg-green-500 border-none text-white">Login</Link>
+                {user && <img className="rounded-full w-12 mr-4" src={user?.photoURL} alt="" title={user?.displayName} />}
+                {user ? <button onClick={handleLogout} className="btn bg-orange-600 font-bold hover:bg-green-500 border-none text-white">Logout</button> : <Link to="/login" className="btn bg-orange-600 font-bold hover:bg-green-500 border-none text-white">Login</Link>}
             </div>
         </div>
     );

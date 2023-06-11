@@ -1,10 +1,26 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
+import SocialLogin from "../shared/SocialLogin";
 
 const Login = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const {loggedIn} = useAuth();
+    const navigate = useNavigate();
+    const [error, setError] = useState(''); 
+
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
-        console.log(data)
+        loggedIn(data.email, data.password)
+        .then((result) =>{
+            console.log(result)
+            reset()
+            navigate('/');
+        })
+        .catch(error => {
+            reset();
+            setError(error.message)
+        })
     }
     return (
         <div className="hero min-h-screen mt-5">
@@ -36,11 +52,13 @@ const Login = () => {
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
                         </div>
+                        <p className="text-red-600">{error}</p>
                         <div className="form-control mt-6">
                             <button className="btn bg-orange-600 font-bold hover:bg-green-500 border-none text-white">Login</button>
                         </div>
                     </form>
                     <div className="divider">OR</div>
+                    <SocialLogin></SocialLogin>
                     <p className="text-center mb-5">New ti this site? Please<Link to="/register" className="btn btn-link normal-case no-underline p-2 text-orange-600">Register...</Link></p>
                 </div>
             </div>
