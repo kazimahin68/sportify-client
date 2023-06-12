@@ -28,7 +28,7 @@ const Navbar = () => {
         <li className="font-bold"><Link>Instructor</Link></li>
         <li className="font-bold"><Link>Classes</Link></li>
         {/* {user && <li className="font-bold"><Link>Dashboard</Link></li>} */}
-        {user && isAdmin && <li className="font-bold"><Link>Dashboard</Link></li>}
+        {user && isAdmin && <li className="font-bold"><Link to="/dashboard">Dashboard</Link></li>}
         {/* {user && <li className="font-bold"><Link>Dashboard</Link></li>} */}
     </>
 
