@@ -8,7 +8,7 @@ const axiosSecure = axios.create({
     baseURL: 'http://localhost:5000',
 })
 const useAxiosSecure = () => {
-    const {logOut} = useAuth();
+    const { logOut } = useAuth();
     const navigate = useNavigate();
     useEffect(() => {
         axiosSecure.interceptors.request.use((config) => {
@@ -22,7 +22,7 @@ const useAxiosSecure = () => {
         axiosSecure.interceptors.response.use(
             (response) => response,
             async (error) => {
-                if (error.response && (error.response.status === 401 || error.response.status === 403)){
+                if (error.response && (error.response.status === 401 || error.response.status === 403)) {
                     await logOut();
                     navigate('/login')
                 }
