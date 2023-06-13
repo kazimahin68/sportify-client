@@ -30,7 +30,7 @@ const Navbar = () => {
     const navItems = <>
         <li className="font-bold"><Link>Home</Link></li>
         <li className="font-bold"><Link to="/instructors">Instructor</Link></li>
-        <li className="font-bold"><Link>Classes</Link></li>
+        <li className="font-bold"><Link to="/classes">Classes</Link></li>
         {/* {user && <li className="font-bold"><Link>Dashboard</Link></li>} */}
         {isAdmin && <li className="font-bold"><Link to="/dashboard/all-users">Dashboard</Link></li>}
         {isInstructor && <li className="font-bold"><Link to="/dashboard/add-class">Dashboard</Link></li>}

@@ -1,37 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import useInstructor from "../../hooks/useInstructor";
-import useAuth from "../../hooks/useAuth";
-import { PulseLoader } from "react-spinners";
 
 const Instructors = () => {
-    const [axiosSecure] = useAxiosSecure();
-    const [isInstructor] = useInstructor();
-    const { loading } = useAuth();
-  
-
-        const { data: instructors = [] } = useQuery(["isInstructor"], async () => {
-            const res = await axiosSecure.get('/users/instructors')
-            return res.data
-        },
-            {
-                enabled: !isInstructor,
-            })
-        // console.log(instructors)
-
-    if (loading) {
-        return (
-            <PulseLoader
-                className="text-center mt-20"
-                color={'#36d7b7'}
-                loading={loading}
-                // cssOverride={override}
-                size={10}
-                aria-label="Loading Spinner"
-                data-testid="loader"
-            />
-        )
-    }
+    const { data: instructors = [] } = useQuery({
+        queryKey: ['instructor'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/instructors')
+            return res.json();
+        }
+    })
+    // console.log(instructors)
 
     return (
         <div className="w-3/4 mx-auto mt-12  bg-blue-500 bg-opacity-30 rounded-lg p-10">
@@ -61,7 +38,7 @@ const Instructors = () => {
                                     </div>
                                 </td>
                                 <td className="capitalize font-bold">{instructor.userName}</td>
-                                <td className= "font-bold">{instructor.email}</td>
+                                <td className="font-bold">{instructor.email}</td>
                             </tr>)
                         }
                     </tbody>

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import SocialLogin from "../shared/SocialLogin";
 // import PhoneInput from 'react-phone-number-input'
 // import 'react-phone-number-input/style.css'
 
@@ -151,6 +152,7 @@ const Register = () => {
                         </div>
                     </form>
                     <div className="divider">OR</div>
+                    <SocialLogin></SocialLogin>
                     <p className="text-center mb-5">Already have an account? Please<Link to="/login" className="btn btn-link normal-case no-underline p-2 text-orange-600">Login...</Link></p>
                 </div>
             </div>
