@@ -7,18 +7,19 @@ import useAuth from "../../hooks/useAuth";
 // import 'react-phone-number-input/style.css'
 
 const Register = () => {
-    const { createUser, UpdateUserProfile } = useAuth;
+    const { createUser, UpdateUserProfile } = useAuth();
     const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const [error, setError] = useState('');
 
     const onSubmit = data => {
+        console.log(data.email, data.password, data.confirm)
         createUser(data.email, data.password)
             .then(() => {
                 // const loggedUser = result.user;
                 // console.log(loggedUser)
                 console.log(data)
-                console.log(data.email)
+                
 
                 UpdateUserProfile(data.name, data.photo)
                     .then(() => {
@@ -94,7 +95,7 @@ const Register = () => {
                             <input type="password" placeholder="Choose Your Password" className="input input-bordered" {...register("password", {
                                 required: "Password is required",
                                 minLength: 6,
-                                maxLength: 12,
+                                maxLength: 20,
                                 pattern: /(?=.*[A-Z])(?=.*[!@#$&*])/
                             })
                             } aria-invalid={errors.password ? "true" : "false"} />

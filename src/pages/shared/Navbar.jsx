@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useAdmin from "../../hooks/useAdmin";
+import useInstructor from "../../hooks/useInstructor";
 
 const Navbar = () => {
+    const [isAdmin] = useAdmin();
+    const [isInstructor] = useInstructor();
     const { user, logOut } = useAuth();
     // console.log(user)
 
@@ -22,20 +26,21 @@ const Navbar = () => {
             window.removeEventListener("scroll", handleScroll);
         }
     }, [])
-    const isAdmin = true;
+    // const isAdmin = true;
     const navItems = <>
         <li className="font-bold"><Link>Home</Link></li>
-        <li className="font-bold"><Link>Instructor</Link></li>
+        <li className="font-bold"><Link to="/instructors">Instructor</Link></li>
         <li className="font-bold"><Link>Classes</Link></li>
         {/* {user && <li className="font-bold"><Link>Dashboard</Link></li>} */}
-        {user && isAdmin && <li className="font-bold"><Link to="/dashboard">Dashboard</Link></li>}
-        {/* {user && <li className="font-bold"><Link>Dashboard</Link></li>} */}
+        {isAdmin && <li className="font-bold"><Link to="/dashboard/all-users">Dashboard</Link></li>}
+        {isInstructor && <li className="font-bold"><Link to="/dashboard/add-class">Dashboard</Link></li>}
+        {user && !isAdmin && !isInstructor && <li className="font-bold"><Link to="/dashboard">Dashboard</Link></li>}
     </>
 
     return (
         <div className={`navbar bg-blue-500 bg-opacity-30 text-orange-600 transition-all duration-1000 ${isSticky ? "fixed top-0 left-0 w-full z-50 transition duration-500" : "relative transition duration-500"}`}>
             <div className="navbar-start">
-                <div className="dropdown">
+                <div className="dropdown z-50">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>

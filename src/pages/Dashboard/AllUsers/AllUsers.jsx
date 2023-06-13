@@ -29,7 +29,7 @@ const AllUsers = () => {
             })
     }
     const handleMakeInstructor = (user) => {
-        fetch(`http://localhost:5000/users/instructor/${user._id}`, {
+        fetch(`http://localhost:5000/users/instructors/${user._id}`, {
             method: "PATCH",
         })
             .then((res) => res.json())

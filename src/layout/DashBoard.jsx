@@ -22,9 +22,9 @@ const DashBoard = () => {
                         <li><Link to="/dashboard/all-users">Manage Users</Link></li>
                     }
                     {
-                        isInstructor && <li><Link to="/dashboard/add-class">Add A Class</Link></li>
+                       !isAdmin && isInstructor && <li><Link to="/dashboard/add-class">Add A Class</Link></li>
                     }
-                    <li><a>Sidebar Item 2</a></li>
+                    <li><Link to='/'>Home</Link></li>
                 </ul>
 
             </div>
