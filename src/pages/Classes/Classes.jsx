@@ -15,7 +15,7 @@ const Classes = () => {
     const [axiosSecure] = useAxiosSecure();
     const navigate = useNavigate();
     const { data: classes = [], isLoading } = useQuery({
-        queryKey: ['class'],
+        queryKey: ['classes'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/classes');
             return res.json();
@@ -41,7 +41,7 @@ const Classes = () => {
         const selectedClass = classes.find(classItem => classItem._id === id);
         selectedClass.studentEmail = user.email;
         console.log(selectedClass)
-        axiosSecure.post('/selected', selectedClass)
+        axiosSecure.post('/classes/selected', selectedClass)
         .then(data => {
             if(data.data.insertedId){
                 Swal.fire({
@@ -51,6 +51,10 @@ const Classes = () => {
                     timer: 1500
                   })
             }
+            else if(data.data.message === "already selected"){
+                toast.error('This class has already been selected')
+            }
+            console.log(data)
         })
 
     }
