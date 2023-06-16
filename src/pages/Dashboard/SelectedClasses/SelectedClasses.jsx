@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const SelectedClasses = () => {
 
@@ -11,7 +12,7 @@ const SelectedClasses = () => {
         const res = await axiosSecure.get(`/classes/selected/${user.email}`)
         return res.data;
     })
-    // console.log(SelectedClasses);
+    console.log(SelectedClasses);
 
 
     const handleDelete = classItem => {
@@ -41,10 +42,7 @@ const SelectedClasses = () => {
             }
         })
     }
-
-    const handlePayment = classItem => {
-        console.log(classItem)
-    }
+    
     return (
         <div className="w-3/4 mx-auto mt-12">
             <div className="overflow-x-auto">
@@ -71,12 +69,12 @@ const SelectedClasses = () => {
                                 <td className="capitalize font-bold">{classItem.instructorName}</td>
                                 <td className="capitalize font-bold">{classItem.seats}</td>
                                 <td>
-                                    <button
-                                        onClick={() => handlePayment(classItem)}
+
+                                    <Link to={`/dashboard/payment/${classItem._id}`}><button
                                         className="btn btn-outline hover:bg-orange-500 btn-sm"
                                     >
                                         Pay
-                                    </button>
+                                    </button></Link>
                                 </td>
                                 <td>
                                     <button

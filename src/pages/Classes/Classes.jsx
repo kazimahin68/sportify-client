@@ -22,7 +22,7 @@ const Classes = () => {
         },
     });
 
-    console.log(classes);
+    // console.log(classes);
 
     if (isLoading) {
         return (
@@ -40,7 +40,7 @@ const Classes = () => {
         }
         const selectedClass = classes.find(classItem => classItem._id === id);
         selectedClass.studentEmail = user.email;
-        console.log(selectedClass)
+        // console.log(selectedClass)
         axiosSecure.post('/classes/selected', selectedClass)
         .then(data => {
             if(data.data.insertedId){
@@ -60,21 +60,21 @@ const Classes = () => {
     }
 
     return (
-        <div className="md:w-4/5 mx-auto mt-12">
+        <div className="md:w-4/5 mx-auto mb-12 mt-12">
             <h2 className="uppercase text-4xl font-bold text-center mb-12">All Classes are here</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 ">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
                 {classes.map((classItem) => (
-                    <div key={classItem._id} className={`card w-96 bg-base-100 shadow-xl mr-5 ${classItem.seats === 0 && 'bg-red-600'}`}>
-                        <figure><img className="h-96" src={classItem.classImage} alt="" /></figure>
+                    <div key={classItem._id} className={`card bg-base-100 shadow-xl ${classItem.seats === 0 && 'bg-red-600'}`}>
+                        <figure><img className="h-80" src={classItem.classImage} alt="" /></figure>
                         <div className="card-body">
                             <h2 className="card-title font-extrabold">{classItem.className}</h2>
-                            <div>
+                            <div className="mb-5">
                                 <p className="font-bold">Instructor Name: {classItem.instructorName}</p>
                                 <p className="font-bold">Available Seats: {classItem.seats}</p>
                                 <p className="font-bold mt-5"><span className="text-xl">Price: </span> {classItem.price} $</p>
                             </div>
                             <div className="card-actions justify-center mt-5">
-                                <button onClick={() => handleSelection(classItem._id)} disabled={isAdmin || isInstructor || classItem.seats === 0} className="btn bg-orange-600 font-bold hover:bg-green-500 border-none text-white">Enroll</button>
+                                <button onClick={() => handleSelection(classItem._id)} disabled={isAdmin || isInstructor || classItem.seats === 0} className="btn bg-orange-600 font-bold hover:bg-green-500 border-none text-white absolute bottom-4">Enroll</button>
                                 <Toaster></Toaster>
                             </div>
                         </div>

@@ -12,6 +12,7 @@ const AllUsers = () => {
     console.log(users)
 
     const handleMakeAdmin = user => {
+        console.log(user)
         fetch(`http://localhost:5000/users/admin/${user._id}`, {
             method: 'PATCH',
         })
@@ -80,7 +81,7 @@ const AllUsers = () => {
                                 <td>
                                     <button
                                         onClick={() => handleMakeAdmin(user)}
-                                        className="btn btn-outline hover:bg-orange-500 btn-sm"
+                                        className="btn hover:bg-orange-500 btn-sm"
                                         disabled={user.role === "admin"}
                                     >
                                         Make Admin
@@ -89,7 +90,7 @@ const AllUsers = () => {
                                 <td>
                                     <button
                                         onClick={() => handleMakeInstructor(user)}
-                                        className="btn btn-outline hover:bg-orange-500 btn-sm"
+                                        className="btn hover:bg-orange-500 btn-sm"
                                         disabled={user.role === "instructor"}
                                     >
                                         Make Instructor
