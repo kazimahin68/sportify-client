@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const ManageClasses = () => {
 
@@ -9,7 +10,7 @@ const ManageClasses = () => {
         const res = axiosSecure.get('/all-classes')
         return (await res).data;
     })
-    console.log(classes)
+    // console.log(classes)
     const handleApprove = item => {
         axiosSecure.patch(`/classes/status/${item._id}`, { status: 'approved' })
             .then(res => {
@@ -38,9 +39,6 @@ const ManageClasses = () => {
                     })
                 }
             })
-    }
-    const handleFeedback = item => {
-        console.log(item)
     }
     return (
         <div className="w-full mx-auto mt-12 bg-slate-200">
@@ -89,7 +87,8 @@ const ManageClasses = () => {
                                 <td><div className="btn-group btn-group-vertical">
                                     <button className="btn btn-xs  hover:bg-orange-500" disabled={classItem.status === 'approved' || classItem.status === 'denied'} onClick={() => handleApprove(classItem)}>Approved</button>
                                     <button className="btn btn-xs  hover:bg-orange-500" disabled={classItem.status === 'approved' || classItem.status === 'denied'} onClick={() => handleDenied(classItem)}>Denied</button>
-                                    <button className="btn btn-xs  hover:bg-orange-500" onClick={() => handleFeedback(classItem)}>FeedBack</button>
+                                    <Link to={`/dashboard/feedback/${classItem._id}`}>
+                                        <button className="btn btn-xs  hover:bg-orange-500">FeedBack</button></Link>
                                 </div></td>
                             </tr>)
                         }
