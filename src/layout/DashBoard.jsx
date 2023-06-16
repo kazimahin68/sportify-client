@@ -31,7 +31,10 @@ const DashBoard = () => {
 
                     {/* Instructor Sidebar */}
                     {
-                        isInstructor && <li><Link to="/dashboard/add-class">Add A Class</Link></li>
+                        isInstructor && <>
+                            <li><Link to="/dashboard/add-class">Add A Class</Link></li>
+                            <li><Link to="/dashboard/my-classes">My Classes</Link></li>
+                        </>
                     }
 
                     {/* User Sidebar */}

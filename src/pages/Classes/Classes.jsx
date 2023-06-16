@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import useAdmin from "../../hooks/useAdmin";
 import useInstructor from "../../hooks/useInstructor";
 import { useState } from "react";
+import { Roll, Slide } from "react-awesome-reveal";
 
 const Classes = () => {
     const [isAdmin] = useAdmin();
@@ -73,25 +74,30 @@ const Classes = () => {
 
     return (
         <div className="md:w-4/5 mx-auto mb-12 mt-12">
-            <h2 className="uppercase text-4xl font-bold text-center mb-12">All Classes are here</h2>
+            <Slide direction="down" duration={1000}>
+                <h2 className="uppercase text-4xl font-bold text-center mb-2 text-orange-600">All Classes are here</h2>
+            </Slide>
+            <hr className="mb-10 border-2" />
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
-                {classes.map((classItem) => (
-                    <div key={classItem._id} className={`card bg-base-100 shadow-xl ${classItem.seats === 0 && 'bg-red-600'}`}>
-                        <figure><img className="h-80" src={classItem.classImage} alt="" /></figure>
-                        <div className="card-body">
-                            <h2 className="card-title font-extrabold">{classItem.className}</h2>
-                            <div className="mb-5">
-                                <p className="font-bold">Instructor Name: {classItem.instructorName}</p>
-                                <p className="font-bold">Available Seats: {classItem.seats}</p>
-                                <p className="font-bold mt-5"><span className="text-xl">Price: </span> {classItem.price} $</p>
-                            </div>
-                            <div className="card-actions justify-center mt-5">
-                                <button onClick={() => handleSelection(classItem)} disabled={isAdmin || isInstructor || classItem.seats === 0 || isSelected(classItem._id)} className="btn bg-orange-600 font-bold hover:bg-green-500 border-none text-white absolute bottom-4">{isSelected(classItem._id) ? "Selected" : "Select"}</button>
-                                <Toaster></Toaster>
+                <Roll cascade delay={0} damping={2e-1}>
+                    {classes.map((classItem) => (
+                        <div key={classItem._id} className={`card bg-base-100 h-[670px] shadow-xl ${classItem.seats === 0 && 'bg-red-600'}`}>
+                            <figure><img className="h-80" src={classItem.classImage} alt="" /></figure>
+                            <div className="card-body">
+                                <h2 className="card-title font-extrabold">{classItem.className}</h2>
+                                <div className="mb-5">
+                                    <p className="font-bold">Instructor Name: {classItem.instructorName}</p>
+                                    <p className="font-bold">Available Seats: {classItem.seats}</p>
+                                    <p className="font-bold mt-5"><span className="text-xl">Price: </span> {classItem.price} $</p>
+                                </div>
+                                <div className="card-actions justify-center mt-5">
+                                    <button onClick={() => handleSelection(classItem)} disabled={isAdmin || isInstructor || classItem.seats === 0 || isSelected(classItem._id)} className="btn bg-orange-600 font-bold hover:bg-green-500 border-none text-white absolute bottom-4">{isSelected(classItem._id) ? "Selected" : "Select"}</button>
+                                    <Toaster></Toaster>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </Roll>
             </div>
         </div>
     );

@@ -5,3 +5,9 @@
 .carousel .carousel-status{
     display: none;
 }
+.carousel .control-prev.control-arrow {
+    height: 100%;
+}
+.carousel .control-next.control-arrow{
+    height: 100%;
+}
