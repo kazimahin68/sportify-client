@@ -9,20 +9,20 @@ const stripePromise = loadStripe('pk_test_51NJ1TQAL2rmJJYlwiQpr352w6xDgbndgJvFQl
 console.log(stripePromise)
 const Payment = () => {
     const { id } = useParams();
-    // console.log(typeof(id))
+    console.log(id)
     const [axiosSecure] = useAxiosSecure();
     const { data: classItem = []} = useQuery({
         queryKey: ['classItem', id],
         queryFn: async () => {
             const res = await axiosSecure(`/classes/payment/${id}`)
-            console.log('res from axios', res)
+            // console.log('res from axios', res)
             return res.data;
         }
     })
 
     const price = classItem.price;
     // const price = parseFloat(amount)
-    console.log(price)
+    // console.log(price)
     return (
         <Elements stripe={stripePromise}>
             <CheckoutForm price={price} classItem={classItem}></CheckoutForm>

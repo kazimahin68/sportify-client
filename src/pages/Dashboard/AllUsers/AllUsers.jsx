@@ -9,7 +9,7 @@ const AllUsers = () => {
             return res.data;
         }
     )
-    console.log(users)
+    // console.log(users)
 
     const handleMakeAdmin = user => {
         console.log(user)
@@ -50,7 +50,8 @@ const AllUsers = () => {
         return users.filter((user) => !user.role);
     };
     return (
-        <div className="w-3/4 mx-auto mt-12">
+        <div className="w-3/4 mx-auto mt-12 bg-slate-200">
+            <h2 className="text-center text-orange-600 font-bold text-3xl my-5">All Users (Only Students)</h2>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}

@@ -34,7 +34,7 @@ const Navbar = () => {
         {/* {user && <li className="font-bold"><Link>Dashboard</Link></li>} */}
         {isAdmin && <li className="font-bold"><Link to="/dashboard/all-users">Dashboard</Link></li>}
         {isInstructor && <li className="font-bold"><Link to="/dashboard/add-class">Dashboard</Link></li>}
-        {user && !isAdmin && !isInstructor && <li className="font-bold"><Link to="/dashboard">Dashboard</Link></li>}
+        {user && !isAdmin && !isInstructor && <li className="font-bold"><Link to="/dashboard/selected-classes">Dashboard</Link></li>}
     </>
 
     return (

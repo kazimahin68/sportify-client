@@ -6,7 +6,7 @@ import useAuth from "../hooks/useAuth";
 const DashBoard = () => {
     const [isAdmin] = useAdmin();
     const [isInstructor] = useInstructor();
-    const {user} = useAuth();
+    const { user } = useAuth();
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -17,25 +17,29 @@ const DashBoard = () => {
 
             </div>
             <div className="drawer-side">
-                <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
+                <label htmlFor="my-drawer-2" className="drawer-overlay mt-0"></label>
                 <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
                     {/* Sidebar content here */}
 
                     {/* Admin Sidebar */}
-                    { isAdmin &&
-                        <li><Link to="/dashboard/all-users">Manage Users</Link></li>
+                    {isAdmin &&
+                        <>
+                            <li><Link to="/dashboard/all-users">Manage Users</Link></li>
+                            <li><Link to="/dashboard/all-classes">Manage Classes</Link></li>
+                        </>
                     }
 
                     {/* Instructor Sidebar */}
                     {
-                       isInstructor && <li><Link to="/dashboard/add-class">Add A Class</Link></li>
+                        isInstructor && <li><Link to="/dashboard/add-class">Add A Class</Link></li>
                     }
 
                     {/* User Sidebar */}
                     {
-                       user && !isAdmin && !isInstructor && <>
-                       <li><Link to='/dashboard/selected-classes'>My Selected Classes</Link></li>
-                       </> 
+                        user && !isAdmin && !isInstructor && <>
+                            <li><Link to='/dashboard/selected-classes'>My Selected Classes</Link></li>
+                            <li><Link to='/dashboard/enrolled-classes'>My Enrolled Classes</Link></li>
+                        </>
                     }
 
                     {/* Common Sidebar */}

@@ -12,7 +12,7 @@ const SelectedClasses = () => {
         const res = await axiosSecure.get(`/classes/selected/${user.email}`)
         return res.data;
     })
-    console.log(SelectedClasses);
+    // console.log(SelectedClasses);
 
 
     const handleDelete = classItem => {
@@ -44,7 +44,8 @@ const SelectedClasses = () => {
     }
     
     return (
-        <div className="w-3/4 mx-auto mt-12">
+        <div className="w-3/4 mx-auto mt-12 bg-slate-200 shadow-md rounded">
+            <h2 className="text-center text-orange-600 font-bold text-3xl my-5">Selected Classes</h2>
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
@@ -70,7 +71,7 @@ const SelectedClasses = () => {
                                 <td className="capitalize font-bold">{classItem.seats}</td>
                                 <td>
 
-                                    <Link to={`/dashboard/payment/${classItem._id}`}><button
+                                    <Link to={`/dashboard/payment/${classItem.classId}`}><button
                                         className="btn btn-outline hover:bg-orange-500 btn-sm"
                                     >
                                         Pay

@@ -7,13 +7,15 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import useAdmin from "../../hooks/useAdmin";
 import useInstructor from "../../hooks/useInstructor";
+import { useState } from "react";
 
 const Classes = () => {
     const [isAdmin] = useAdmin();
     const [isInstructor] = useInstructor();
-    const {user} = useAuth();
+    const { user } = useAuth();
     const [axiosSecure] = useAxiosSecure();
     const navigate = useNavigate();
+    const [selectedClass, setSelectedClass] = useState([]);
     const { data: classes = [], isLoading } = useQuery({
         queryKey: ['classes'],
         queryFn: async () => {
@@ -32,32 +34,42 @@ const Classes = () => {
         );
     }
 
-    const handleSelection = id => {
-        if(!user){
+    const handleSelection = classItem => {
+        console.log(classItem)
+        if (!user && user.email) {
             toast('You have to login first to enroll');
             navigate('/login');
             return
         }
-        const selectedClass = classes.find(classItem => classItem._id === id);
-        selectedClass.studentEmail = user.email;
+        const selectedClassItem = { classId: classItem._id, className: classItem.className, instructorName: classItem.instructorName, seats: classItem.seats, studentEmail: user?.email, price: classItem.price }
+        // const selectedClass = classes.find(classItem => classItem._id === id);
+        // selectedClass.classItemId = classes.map(item => item._id);
+        // selectedClass.studentEmail = user.email;
         // console.log(selectedClass)
-        axiosSecure.post('/classes/selected', selectedClass)
-        .then(data => {
-            if(data.data.insertedId){
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Your class is successfully selected',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-            }
-            else if(data.data.message === "already selected"){
-                toast.error('This class has already been selected')
-            }
-            console.log(data)
-        })
+        axiosSecure.post('/classes/selected', selectedClassItem)
+            .then(data => {
+                if (data.data.insertedId) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Your class is successfully selected',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    setSelectedClass(prevSelectedClasses => [
+                        ...prevSelectedClasses,
+                        classItem._id
+                    ]);
+                }
+                // else if(data.data.message === "already selected"){
+                //     toast.error('This class has already been selected')
+                // }
+                // console.log(data)
+            })
 
     }
+    const isSelected = classId => {
+        return selectedClass.includes(classId);
+    };
 
     return (
         <div className="md:w-4/5 mx-auto mb-12 mt-12">
@@ -74,7 +86,7 @@ const Classes = () => {
                                 <p className="font-bold mt-5"><span className="text-xl">Price: </span> {classItem.price} $</p>
                             </div>
                             <div className="card-actions justify-center mt-5">
-                                <button onClick={() => handleSelection(classItem._id)} disabled={isAdmin || isInstructor || classItem.seats === 0} className="btn bg-orange-600 font-bold hover:bg-green-500 border-none text-white absolute bottom-4">Enroll</button>
+                                <button onClick={() => handleSelection(classItem)} disabled={isAdmin || isInstructor || classItem.seats === 0 || isSelected(classItem._id)} className="btn bg-orange-600 font-bold hover:bg-green-500 border-none text-white absolute bottom-4">{isSelected(classItem._id) ? "Selected" : "Select"}</button>
                                 <Toaster></Toaster>
                             </div>
                         </div>

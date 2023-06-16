@@ -51,8 +51,8 @@ const AddAClass = () => {
 
 
     return (
-        <div className="hero min-h-screen mt-5 mb-5">
-            <div className="hero-content bg-blue-500 bg-opacity-30 rounded-lg p-10 w-3/4">
+        <div className="hero mt-5 mb-5">
+            <div className="hero-content bg-blue-500 bg-opacity-30 rounded-lg p-10 w-full lg:w-4/5">
                 <div className="card w-full shadow-2xl bg-base-100">
                     <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                         <h1 className="text-5xl font-bold text-center mb-12 text-orange-600">Add A Class</h1>
@@ -60,7 +60,7 @@ const AddAClass = () => {
                             <label className="label">
                                 <span className="label-text font-bold">Class Name</span>
                             </label>
-                            <input type="text" placeholder="Class Name" className="input input-bordered"  {...register("className", { required: "Class name is required" })} />
+                            <input type="text" placeholder="Class Name" className="input input-bordered w-full"  {...register("className", { required: "Class name is required" })} />
                         </div>
 
                         {/* Photo URL */}
@@ -68,7 +68,7 @@ const AddAClass = () => {
                             <label className="label">
                                 <span className="label-text font-bold">Class Image</span>
                             </label>
-                            <input type="text"  {...register("classImage", { required: "Photo URL is required" })} placeholder="Photo URL" className="input input-bordered" />
+                            <input type="text"  {...register("classImage", { required: "Photo URL is required" })} placeholder="Photo URL" className="input input-bordered w-full" />
                             {errors.classImage && <p className="text-red-600" role="alert">{errors.classImage?.message}</p>}
                         </div>
 
@@ -77,7 +77,7 @@ const AddAClass = () => {
                             <label className="label">
                                 <span className="label-text font-bold">Your Name</span>
                             </label>
-                            <input type="text" defaultValue={`${user.displayName}`} readOnly  {...register("instructorName", { required: "Photo URL is required" })} className="input input-bordered" />
+                            <input type="text" defaultValue={`${user.displayName}`} readOnly  {...register("instructorName", { required: "Photo URL is required" })} className="input input-bordered w-full" />
                         </div>
 
                         {/* Instructor Email */}
@@ -85,7 +85,7 @@ const AddAClass = () => {
                             <label className="label">
                                 <span className="label-text font-bold">Your Email</span>
                             </label>
-                            <input type="email" defaultValue={user.email} readOnly className="input input-bordered" {...register("instructorEmail", { required: "Email Address is required" })} />
+                            <input type="email" defaultValue={user.email} readOnly className="input input-bordered w-full" {...register("instructorEmail", { required: "Email Address is required" })} />
                         </div>
 
                         <div className="flex flex-col lg:flex-row gap-x-10 gap-y-3 justify-between">
@@ -94,7 +94,7 @@ const AddAClass = () => {
                                 <label className="label">
                                     <span className="label-text font-bold">Available Seats</span>
                                 </label>
-                                <input type="number"  {...register("seats", { required: "Seat number is required" })} placeholder="Seat Number" className="input input-bordered" />
+                                <input type="number"  {...register("seats", { required: "Seat number is required" })} placeholder="Seat Number" className="input input-bordered w-full" />
                                 {errors.seats && <p className="text-red-600" role="alert">{errors.seats?.message}</p>}
                             </div>
                             {/* Course Price */}
@@ -102,7 +102,7 @@ const AddAClass = () => {
                                 <label className="label">
                                     <span className="label-text font-bold">Enrollment Price</span>
                                 </label>
-                                <input type="number"  {...register("price", { required: "Seat number is required" })} placeholder="Enrollment Price" className="input input-bordered" />
+                                <input type="number"  {...register("price", { required: "Seat number is required" })} placeholder="Enrollment Price" className="input input-bordered w-full" />
                                 {errors.price && <p className="text-red-600" role="alert">{errors.price?.message}</p>}
                             </div>
                         </div>

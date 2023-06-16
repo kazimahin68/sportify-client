@@ -4,9 +4,11 @@ import './CheckoutForm.css'
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ price, classItem }) => {
 
+    console.log(classItem)
     const stripe = useStripe();
     const elements = useElements();
     const [cardError, setCardError] = useState('');
@@ -16,7 +18,9 @@ const CheckoutForm = ({ price, classItem }) => {
 
     const [axiosSecure] = useAxiosSecure();
     const [clientSecret, setClientSecret] = useState('');
-    console.log(price)
+
+    const navigate = useNavigate();
+    // console.log(price)
     useEffect(() => {
         if (price > 0) {
             axiosSecure.post('/create-payment-intent', { price })
@@ -27,7 +31,7 @@ const CheckoutForm = ({ price, classItem }) => {
         }
     }, [price, axiosSecure])
 
-    console.log(clientSecret)
+    // console.log(clientSecret)
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -65,11 +69,11 @@ const CheckoutForm = ({ price, classItem }) => {
             },
         );
         if (confirmError) {
-            console.log(confirmError)
+            setCardError(confirmError)
         }
 
         setProcessing(false)
-        console.log(paymentIntent)
+        // console.log(paymentIntent)
 
         if (paymentIntent.status === "succeeded") {
             setTransactionId(paymentIntent.id)
@@ -84,7 +88,10 @@ const CheckoutForm = ({ price, classItem }) => {
             }
             axiosSecure.post('/payments', payment)
                 .then(res => {
-                    console.log(res.data.insertResult)
+                    console.log(res.data)
+                    // if (res.data.message === "class already enrolled") {
+                    //     return toast.error('This class has already been enrolled')
+                    // }
                     if (res.data.insertResult.insertedId) {
                         Swal.fire({
                             icon: 'success',
@@ -92,22 +99,14 @@ const CheckoutForm = ({ price, classItem }) => {
                             showConfirmButton: false,
                             timer: 1500
                         })
-
-
-                        // axiosSecure.patch(`/classes/${classItem._id}`, {
-                        //     seats: classItem.seats - 1 ,
-                        //     enrolled: classItem.enrolled + 1
-                        // })
-                        // .then(res => {
-                        //     console.log(res.data)
-                        // })
+                        navigate('/dashboard/enrolled-classes')
                     }
                 })
         }
     }
     return (
         <>
-            <form className="w-3/4 m-10" onSubmit={handleSubmit}>
+            <form className="w-3/4 mx-auto" onSubmit={handleSubmit}>
                 <CardElement
                     options={{
                         style: {
@@ -124,7 +123,7 @@ const CheckoutForm = ({ price, classItem }) => {
                         },
                     }}
                 />
-                <button className="btn" type="submit" disabled={!stripe || !clientSecret || processing}>
+                <button className="btn btn-sm bg-orange-600 font-bold hover:bg-green-500 border-none text-white" type="submit" disabled={!stripe || !clientSecret || processing}>
                     Pay
                 </button>
             </form>

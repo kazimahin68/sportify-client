@@ -12,6 +12,7 @@ const Instructors = () => {
 
     return (
         <div className="w-3/4 mx-auto mt-12  bg-blue-500 bg-opacity-30 rounded-lg p-10">
+            <h2 className="text-center text-orange-600 font-bold text-5xl mb-10">Our all instructors information</h2>
             <div className="overflow-x-auto">
                 <table className="table border-4">
                     {/* head */}
