@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useInstructor from "../../../hooks/useInstructor";
 import { PulseLoader } from "react-spinners";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const MyClasses = () => {
 
@@ -32,53 +33,58 @@ const MyClasses = () => {
     })
     console.log(classes);
     return (
-        <div className="w-full mx-auto bg-slate-200">
-            <h2 className="text-center text-orange-600 font-bold text-3xl my-5">All Classes</h2>
-            <div className="overflow-x-auto">
-                <table className="table">
-                    {/* head */}
-                    <thead>
-                        <tr className="text-orange-600 text-xl">
-                            <th>#</th>
-                            <th>Class Photo</th>
-                            <th>Class Name</th>
-                            <th>Status</th>
-                            <th>Enrolled</th>
-                            <th>Update</th>
-                            <th>Feedback</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* row 1 */}
-                        {
-                            classes.map((classItem, index) => <tr key={classItem._id}>
-                                <td>
-                                    {index + 1}
-                                </td>
-                                <td>
-                                    <div className="avatar">
-                                        <div className="mask mask-squircle w-24 h-24">
-                                            <img src={classItem.classImage} alt="" />
+        <>
+            <Helmet>
+                <title>Sportify Camp || My classes</title>
+            </Helmet>
+            <div className="w-full mx-auto bg-slate-200">
+                <h2 className="text-center text-orange-600 font-bold text-3xl my-5">All Classes</h2>
+                <div className="overflow-x-auto">
+                    <table className="table">
+                        {/* head */}
+                        <thead>
+                            <tr className="text-orange-600 text-xl">
+                                <th>#</th>
+                                <th>Class Photo</th>
+                                <th>Class Name</th>
+                                <th>Status</th>
+                                <th>Enrolled</th>
+                                <th>Update</th>
+                                <th>Feedback</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {/* row 1 */}
+                            {
+                                classes.map((classItem, index) => <tr key={classItem._id}>
+                                    <td>
+                                        {index + 1}
+                                    </td>
+                                    <td>
+                                        <div className="avatar">
+                                            <div className="mask mask-squircle w-24 h-24">
+                                                <img src={classItem.classImage} alt="" />
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td className="capitalize font-bold">{classItem.className}</td>
-                                <td>
-                                    {classItem.status}
-                                </td>
-                                <td>{classItem.enrolled} Students</td>
-                                <td><div className="btn-group btn-group-vertical">
-                                    <Link to={`/dashboard/update-class/${classItem._id}`}>
-                                        <button className="btn btn-xs  hover:bg-orange-500">Update</button></Link>
-                                </div></td>
-                                <td>{classItem?.feedback}</td>
-                            </tr>)
-                        }
-                    </tbody>
+                                    </td>
+                                    <td className="capitalize font-bold">{classItem.className}</td>
+                                    <td>
+                                        {classItem.status}
+                                    </td>
+                                    <td>{classItem.enrolled} Students</td>
+                                    <td><div className="btn-group btn-group-vertical">
+                                        <Link to={`/dashboard/update-class/${classItem._id}`}>
+                                            <button className="btn btn-xs  hover:bg-orange-500">Update</button></Link>
+                                    </div></td>
+                                    <td>{classItem?.feedback}</td>
+                                </tr>)
+                            }
+                        </tbody>
 
-                </table>
+                    </table>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
