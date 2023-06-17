@@ -5,12 +5,12 @@ const Admin = () => {
     const { data: admins = [] } = useQuery({
         queryKey: ['admin'],
         queryFn: async () => {
-            const res = await fetch('https://sportify-camp-server-kazimahin68.vercel.app/users/admin')
+            const res = await fetch('http://localhost:5000/users/admin')
             return res.json();
         }
     })
 
-    console.log(admins)
+    // console.log(admins)
     return (
         <section>
             <div className="md:w-4/5 mx-auto mb-12 mt-24">

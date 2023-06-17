@@ -21,7 +21,7 @@ const Classes = () => {
     const { data: classes = [], isLoading } = useQuery({
         queryKey: ['classes'],
         queryFn: async () => {
-            const res = await fetch('https://sportify-camp-server-kazimahin68.vercel.app/classes');
+            const res = await fetch('http://localhost:5000/classes');
             return res.json();
         },
     });
@@ -37,8 +37,8 @@ const Classes = () => {
     }
 
     const handleSelection = classItem => {
-        console.log(classItem)
-        if (!user && user.email) {
+        // console.log(classItem)
+        if (!user && user?.email) {
             toast('You have to login first to enroll');
             navigate('/login');
             return

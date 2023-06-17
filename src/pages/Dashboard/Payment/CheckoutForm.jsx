@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ price, classItem }) => {
 
-    // console.log(classItem)
+    // console.log(classItem.classId)
     const stripe = useStripe();
     const elements = useElements();
     const [cardError, setCardError] = useState('');
@@ -82,13 +82,14 @@ const CheckoutForm = ({ price, classItem }) => {
                 className: classItem.className,
                 transactionId: paymentIntent.id,
                 price,
-                id: classItem._id,
+                id: classItem.classId,
+                deleteId: classItem._id,
                 date: new Date(),
                 status: 'service pending'
             }
             axiosSecure.post('/payments', payment)
                 .then(res => {
-                    console.log(res.data)
+                    // console.log(res.data)
                     // if (res.data.message === "class already enrolled") {
                     //     return toast.error('This class has already been enrolled')
                     // }

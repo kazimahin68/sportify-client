@@ -77,7 +77,7 @@ const SelectedClasses = () => {
                                     <td>
 
                                         <Link to={`/dashboard/payment/${classItem._id}`}><button
-                                            className="btn btn-outline hover:bg-orange-500 btn-sm"
+                                            className="btn hover:bg-orange-500 btn-sm"
                                         >
                                             Pay
                                         </button></Link>
@@ -85,7 +85,7 @@ const SelectedClasses = () => {
                                     <td>
                                         <button
                                             onClick={() => handleDelete(classItem)}
-                                            className="btn btn-outline hover:bg-orange-500 btn-sm"
+                                            className="btn hover:bg-orange-500 btn-sm"
                                         >
                                             Delete
                                         </button>

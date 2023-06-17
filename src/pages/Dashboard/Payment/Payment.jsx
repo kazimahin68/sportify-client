@@ -22,7 +22,7 @@ const Payment = () => {
     })
 
     const price = classItem.price;
-    // const price = parseFloat(amount)
+    // console.log(classItem)
     // console.log(price)
     return (
         <>
