@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://sportify-camp-server-kazimahin68.vercel.app',
 })
 const useAxiosSecure = () => {
     const { logOut } = useAuth();

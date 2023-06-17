@@ -14,7 +14,7 @@ const EnrolledClasses = () => {
         const res = await axiosSecure.get(`/payments/enrolled/${user?.email}`)
         return res.data;
     })
-    console.log(enrolledClass)
+    // console.log(enrolledClass)
     return (
         <>
             <Helmet>

@@ -6,8 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
-const stripePromise = loadStripe('pk_test_51NJ1TQAL2rmJJYlwiQpr352w6xDgbndgJvFQlFjyyr72Vd5DcEDc2XP522cpgQgOi1A2UtwAVQdgbjDfzGjimshT00zwgBNlKx');
-console.log(stripePromise)
+const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
+// console.log(stripePromise)
 const Payment = () => {
     const { id } = useParams();
     console.log(id)

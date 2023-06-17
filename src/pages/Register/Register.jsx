@@ -26,7 +26,7 @@ const Register = () => {
                 UpdateUserProfile(data.name, data.photo)
                     .then(() => {
                         const saveUser = { userName: data.name, email: data.email, userPhoto: data.photo, gender: data.gender }
-                        fetch('http://localhost:5000/users', {
+                        fetch('https://sportify-camp-server-kazimahin68.vercel.app/users', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json'

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ price, classItem }) => {
 
-    console.log(classItem)
+    // console.log(classItem)
     const stripe = useStripe();
     const elements = useElements();
     const [cardError, setCardError] = useState('');
@@ -25,7 +25,7 @@ const CheckoutForm = ({ price, classItem }) => {
         if (price > 0) {
             axiosSecure.post('/create-payment-intent', { price })
                 .then(res => {
-                    console.log(res.data.clientSecret)
+                    // console.log(res.data.clientSecret)
                     setClientSecret(res.data.clientSecret);
                 })
         }
