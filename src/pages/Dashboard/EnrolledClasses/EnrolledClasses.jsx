@@ -20,7 +20,7 @@ const EnrolledClasses = () => {
             <Helmet>
                 <title>Sportify Camp || Enrolled Class</title>
             </Helmet>
-            <div className="w-3/4 mx-auto mt-12 bg-slate-200 shadow-md rounded mb-12">
+            <div className="w-3/4 mx-auto mt-12 bg-slate-200 shadow-md rounded mb-12 p-5">
                 <h2 className="text-center text-orange-600 font-bold text-3xl my-5">All Enrolled Classes</h2>
                 <div className="overflow-x-auto">
                     <table className="table">
@@ -43,7 +43,7 @@ const EnrolledClasses = () => {
                                     </td>
                                     <td className="capitalize font-bold">{classItem.className}</td>
                                     <td className="capitalize font-bold">{classItem.transactionId}</td>
-                                    <td className="capitalize font-bold">{classItem.price}</td>
+                                    <td className="capitalize font-bold">{classItem.price} $</td>
                                     <td>
                                         {moment(classItem.date).format("LLL")}
                                     </td>

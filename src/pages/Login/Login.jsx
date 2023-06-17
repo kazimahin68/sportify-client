@@ -4,11 +4,13 @@ import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
 import SocialLogin from "../shared/SocialLogin";
 import { Helmet } from "react-helmet";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
     const { loggedIn } = useAuth();
     const navigate = useNavigate();
     const [error, setError] = useState('');
+    const [showPassword, setShowPassword] = useState(true);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
@@ -23,6 +25,7 @@ const Login = () => {
                 setError(error.message)
             })
     }
+
     return (
         <>
             <Helmet>
@@ -48,8 +51,22 @@ const Login = () => {
                                 <label className="label">
                                     <span className="label-text font-bold">Password</span>
                                 </label>
-                                <input type="password" placeholder="Your Password" className="input input-bordered" {...register("password", { required: "Password is required" })
-                                } aria-invalid={errors.password ? "true" : "false"} />
+                                <div className="relative">
+                                    <input
+                                        type={showPassword ? "text" : "password"}
+                                        placeholder="Your Password"
+                                        className="input input-bordered"
+                                        {...register("password", { required: "Password is required" })}
+                                        aria-invalid={errors.password ? "true" : "false"}
+                                    />
+                                    <button
+                                        type="button"
+                                        className="absolute right-2 top-1 shadow-none hover:bg-orange-600"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                    >
+                                        {showPassword ? <FaEyeSlash className="text-black" /> : <FaEye className="text-black font-bold"/>}
+                                    </button>
+                                </div>
                                 {errors.password && <p className="text-red-600" role="alert">{errors.password?.message}</p>}
 
                                 {/* TODO: Forgot password verify */}

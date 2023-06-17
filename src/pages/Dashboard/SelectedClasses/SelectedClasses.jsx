@@ -49,7 +49,7 @@ const SelectedClasses = () => {
             <Helmet>
                 <title>Sportify Camp || Selected Class</title>
             </Helmet>
-            <div className="w-3/4 mx-auto mt-12 bg-slate-200 shadow-md rounded">
+            <div className="w-3/4 mx-auto mt-12 bg-slate-200 shadow-md rounded p-5">
                 <h2 className="text-center text-orange-600 font-bold text-3xl my-5">Selected Classes</h2>
                 <div className="overflow-x-auto">
                     <table className="table">

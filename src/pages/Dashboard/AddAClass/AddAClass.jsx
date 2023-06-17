@@ -23,6 +23,7 @@ const AddAClass = () => {
             seats: parseFloat(data.seats),
             price: parseFloat(data.price),
             status: "pending",
+            date: new Date(),
         };
         // console.log(savedClass)
         const response = await axiosSecure.post("/classes", savedClass);

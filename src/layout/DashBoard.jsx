@@ -1,7 +1,8 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
 import useInstructor from "../hooks/useInstructor";
 import useAuth from "../hooks/useAuth";
+import { FaWallet, FaHome, FaUtensils, FaBook, FaBookmark, FaBookOpen, FaUserCog, FaUserEdit, FaEdit } from 'react-icons/fa';
 
 const DashBoard = () => {
     const [isAdmin] = useAdmin();
@@ -10,43 +11,46 @@ const DashBoard = () => {
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-            <div className="drawer-content flex flex-col items-center justify-center">
+            <div className="drawer-content">
                 {/* Page content here */}
+                <label htmlFor="my-drawer-2" className="btn bg-orange-600 hover:bg-green-600 drawer-button lg:hidden">Open Menu</label>
                 <Outlet></Outlet>
-                <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
 
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" className="drawer-overlay mt-0"></label>
-                <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
+                <ul className="menu p-4 w-72 h-full bg-base-200 pt-10">
                     {/* Sidebar content here */}
 
                     {/* Admin Sidebar */}
                     {isAdmin &&
                         <>
-                            <li><Link to="/dashboard/all-users">Manage Users</Link></li>
-                            <li><Link to="/dashboard/all-classes">Manage Classes</Link></li>
+                            <li className="font-bold"><NavLink to="/dashboard/all-users"><FaUserEdit></FaUserEdit>Manage Users</NavLink></li>
+                            <li className="font-bold"><NavLink to="/dashboard/all-classes"><FaEdit></FaEdit>Manage Classes</NavLink></li>
                         </>
                     }
 
                     {/* Instructor Sidebar */}
                     {
                         isInstructor && <>
-                            <li><Link to="/dashboard/add-class">Add A Class</Link></li>
-                            <li><Link to="/dashboard/my-classes">My Classes</Link></li>
+                            <li className="font-bold"><NavLink to="/dashboard/add-class"><FaUtensils></FaUtensils>Add A Class</NavLink></li>
+                            <li className="font-bold"><NavLink to="/dashboard/my-classes"><FaBook></FaBook>My Classes</NavLink></li>
                         </>
                     }
 
                     {/* User Sidebar */}
                     {
                         user && !isAdmin && !isInstructor && <>
-                            <li><Link to='/dashboard/selected-classes'>My Selected Classes</Link></li>
-                            <li><Link to='/dashboard/enrolled-classes'>My Enrolled Classes</Link></li>
+                            <li className="font-bold"><NavLink to='/dashboard/selected-classes'><FaBookmark></FaBookmark> My Selected Classes</NavLink></li>
+                            <li className="font-bold"><NavLink to='/dashboard/enrolled-classes'><FaWallet></FaWallet> My Enrolled Classes</NavLink></li>
                         </>
                     }
 
+                    <div className="divider my-10"></div>
                     {/* Common Sidebar */}
-                    <li><Link to='/'>Home</Link></li>
+                    <li className="font-bold"><NavLink to='/'><FaHome></FaHome>Home</NavLink></li>
+                    <li className="font-bold"><Link to="/instructors"><FaUserCog></FaUserCog>Instructor</Link></li>
+                    <li className="font-bold"><Link to="/classes"><FaBookOpen></FaBookOpen>Classes</Link></li>
                 </ul>
 
             </div>
