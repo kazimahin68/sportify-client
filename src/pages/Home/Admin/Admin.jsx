@@ -5,7 +5,7 @@ const Admin = () => {
     const { data: admins = [] } = useQuery({
         queryKey: ['admin'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users/admin')
+            const res = await fetch('https://sportify-camp-server-kazimahin68.vercel.app/users/admin')
             return res.json();
         }
     })

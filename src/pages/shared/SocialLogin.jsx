@@ -16,7 +16,7 @@ const SocialLogin = () => {
             .then(result => {
                 const loggedUser = result.user;
                 const saveUser = { userName: loggedUser.displayName, email: loggedUser.email, userPhoto: loggedUser.photoURL }
-                fetch('http://localhost:5000/users', {
+                fetch('https://sportify-camp-server-kazimahin68.vercel.app/users', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

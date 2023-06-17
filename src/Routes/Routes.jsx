@@ -18,6 +18,7 @@ import ManageClasses from "../pages/Dashboard/ManageClasses/ManageClasses";
 import Feedback from "../pages/Dashboard/Feedback/Feedback";
 import MyClasses from "../pages/Dashboard/MyClasses/MyClasses";
 import UpdateClass from "../pages/Dashboard/UpdateClass/UpdateClass";
+import ErrorPage from "../pages/shared/ErrorPage";
 
 
 const router = createBrowserRouter([
@@ -91,6 +92,10 @@ const router = createBrowserRouter([
                 element: <InstructorRoute><UpdateClass></UpdateClass></InstructorRoute>
             }
         ]
+    },
+    {
+        path: '/*',
+        element: <ErrorPage></ErrorPage>
     }
 ])
 

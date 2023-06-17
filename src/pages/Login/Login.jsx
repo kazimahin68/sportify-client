@@ -10,7 +10,7 @@ const Login = () => {
     const { loggedIn } = useAuth();
     const navigate = useNavigate();
     const [error, setError] = useState('');
-    const [showPassword, setShowPassword] = useState(true);
+    const [showPassword, setShowPassword] = useState(false);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = data => {

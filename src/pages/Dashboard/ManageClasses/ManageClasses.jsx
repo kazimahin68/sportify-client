@@ -46,7 +46,7 @@ const ManageClasses = () => {
             <Helmet>
                 <title>Sportify Camp || Manage User</title>
             </Helmet>
-            <div className="w-full mx-auto mt-12 bg-slate-200">
+            <div className="w-full mx-auto mt-12 bg-slate-200 p-5">
                 <h2 className="text-center text-orange-600 font-bold text-3xl my-5">All Classes</h2>
                 <div className="overflow-x-auto">
                     <table className="table">
