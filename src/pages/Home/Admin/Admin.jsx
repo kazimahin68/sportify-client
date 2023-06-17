@@ -13,7 +13,7 @@ const Admin = () => {
     // console.log(admins)
     return (
         <section>
-            <div className="md:w-4/5 mx-auto mb-12 mt-24">
+            <div className="md:w-4/5 w-11/12 mx-auto mb-12 mt-24">
                 <h2 className="uppercase text-2xl lg:text-4xl font-bold text-center mb-2 text-orange-600">Our Three Main Contributors</h2>
                 <hr className="mb-10 border-2" />
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
