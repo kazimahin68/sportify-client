@@ -5,7 +5,7 @@ const Admin = () => {
     const { data: admins = [] } = useQuery({
         queryKey: ['admin'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users/admin')
+            const res = await fetch('https://sportify-camp-server-kazimahin68.vercel.app/users/admin')
             return res.json();
         }
     })
@@ -14,7 +14,7 @@ const Admin = () => {
     return (
         <section>
             <div className="md:w-4/5 mx-auto mb-12 mt-24">
-                <h2 className="uppercase text-4xl font-bold text-center mb-2 text-orange-600">Our Three Main Contributors</h2>
+                <h2 className="uppercase text-2xl lg:text-4xl font-bold text-center mb-2 text-orange-600">Our Three Main Contributors</h2>
                 <hr className="mb-10 border-2" />
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
                     <Fade cascade>

@@ -26,7 +26,7 @@ const Register = () => {
                 UpdateUserProfile(data.name, data.photo)
                     .then(() => {
                         const saveUser = { userName: data.name, email: data.email, userPhoto: data.photo, gender: data.gender }
-                        fetch('http://localhost:5000/users', {
+                        fetch('https://sportify-camp-server-kazimahin68.vercel.app/users', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json'
@@ -60,7 +60,7 @@ const Register = () => {
                 <title>Sportify Camp || Register</title>
             </Helmet>
             <div className="hero min-h-screen mt-5 mb-5">
-                <div className="hero-content flex-col lg:flex-row gap-10 bg-blue-500 bg-opacity-30 rounded-lg p-10">
+                <div className="hero-content flex-col lg:flex-row gap-10 bg-blue-500 bg-opacity-30 rounded-lg md:p-10">
                     <div className="text-center lg:text-left lg:w-1/2">
                         <img className="rounded-xl" src="https://i.ibb.co/NFnmMcr/sports-tools-53876-138077.png" alt="" />
                     </div>

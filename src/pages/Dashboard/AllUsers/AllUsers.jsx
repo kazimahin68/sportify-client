@@ -14,7 +14,7 @@ const AllUsers = () => {
 
     const handleMakeAdmin = user => {
         console.log(user)
-        fetch(`http://localhost:5000/users/admin/${user._id}`, {
+        fetch(`https://sportify-camp-server-kazimahin68.vercel.app/users/admin/${user._id}`, {
             method: 'PATCH',
         })
             .then(res => res.json())
@@ -31,7 +31,7 @@ const AllUsers = () => {
             })
     }
     const handleMakeInstructor = (user) => {
-        fetch(`http://localhost:5000/users/instructors/${user._id}`, {
+        fetch(`https://sportify-camp-server-kazimahin68.vercel.app/users/instructors/${user._id}`, {
             method: "PATCH",
         })
             .then((res) => res.json())
@@ -56,7 +56,7 @@ const AllUsers = () => {
             <title>Sportify Camp || All students</title>
         </Helmet>
             <div className="w-3/4 mx-auto mt-12 bg-slate-200 p-5">
-                <h2 className="text-center text-orange-600 font-bold text-3xl my-5">All Users (Only Students)</h2>
+                <h2 className="text-center text-orange-600 font-bold lg:text-3xl my-5">All Users (Only Students)</h2>
                 <div className="overflow-x-auto">
                     <table className="table">
                         {/* head */}

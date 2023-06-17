@@ -10,3 +10,11 @@
   .drawer-side a {
     background-color: transparent;
   }
+
+  input, select {
+    width: 100% !important
+  }
+
+  form {
+    margin: 40px 20px !important;
+  }

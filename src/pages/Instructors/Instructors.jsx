@@ -6,7 +6,7 @@ const Instructors = () => {
     const { data: instructors = [] } = useQuery({
         queryKey: ['instructor'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/instructors')
+            const res = await fetch('https://sportify-camp-server-kazimahin68.vercel.app/instructors')
             return res.json();
         }
     })
@@ -18,7 +18,7 @@ const Instructors = () => {
                 <title>Sportify Camp || Instructors</title>
             </Helmet>
             <div className="w-3/4 mx-auto mt-12  bg-blue-500 bg-opacity-30 rounded-lg p-10">
-                <h2 className="text-center text-orange-600 font-bold text-5xl mb-10">Our all instructors information</h2>
+                <h2 className="text-center text-orange-600 font-bold text-2xl lg:text-5xl mb-10">Our all instructors information</h2>
                 <Fade duration={3000} cascade delay={100}>
 
                     <div className="overflow-x-auto">

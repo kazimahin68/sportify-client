@@ -32,12 +32,12 @@ const Login = () => {
                 <title>Sportify Camp || Login</title>
             </Helmet>
             <div className="hero min-h-screen mt-5">
-                <div className="hero-content flex-col lg:flex-row gap-10 bg-blue-500 bg-opacity-30 rounded-lg p-10">
-                    <div className="text-center lg:text-left lg:w-1/2">
+                <div className="hero-content flex-col lg:flex-row gap-10 bg-blue-500 bg-opacity-30 rounded-lg md:p-10">
+                    <div className="text-center lg:w-1/2">
                         <img className="rounded-xl" src="https://i.ibb.co/NFnmMcr/sports-tools-53876-138077.png" alt="" />
                     </div>
                     <div className="card w-full shadow-2xl bg-base-100 lg:w-1/2">
-                        <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+                        <form onSubmit={handleSubmit(onSubmit)}>
                             <h1 className="text-5xl font-bold text-center mb-5 text-orange-600">Login now</h1>
                             <div className="form-control">
                                 <label className="label">
